@@ -31,16 +31,21 @@ import java.util.ArrayList;
 /*
  * @author Chris Coughlan 2019
  */
-public class FlavorViewAdapter extends RecyclerView.Adapter<FlavorViewAdapter.ViewHolder> {
+public class DesignViewAdapter extends RecyclerView.Adapter<DesignViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
     private Context mNewContext;
 
     //add array for each item\
-    private ArrayList<FlavorAdapter> mFlavors;
+    private ArrayList<TShirtDesignAdapter> mDesigns;
 
-    FlavorViewAdapter(Context mNewContext, ArrayList<FlavorAdapter> mflavor) {
+    // here creating the onItemListener to pass it to each view holder
+    private OnItemListener mOnItemListener;
+
+    DesignViewAdapter(Context mNewContext, ArrayList<TShirtDesignAdapter> mdesigns, OnItemListener mOnItemListener) {
         this.mNewContext = mNewContext;
-        this.mFlavors = mflavor;
+        this.mDesigns = mdesigns;
+        this.mOnItemListener = mOnItemListener;
+
     }
 
     //declare methods
@@ -48,33 +53,35 @@ public class FlavorViewAdapter extends RecyclerView.Adapter<FlavorViewAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_list_item, viewGroup, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, this.mOnItemListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         Log.d(TAG, "onBindViewHolder: was called");
 
-        viewHolder.imageText.setText(mFlavors.get(position).getVersionNumber());
-        viewHolder.versionText.setText(mFlavors.get(position).getVersionName());
-        viewHolder.imageItem.setImageResource(mFlavors.get(position).getImageResourceId());
+        viewHolder.imageText.setText(mDesigns.get(position).getAvailableSize());
+        viewHolder.versionText.setText(mDesigns.get(position).getStyleName());
+        viewHolder.imageItem.setImageResource(mDesigns.get(position).getImageResourceId());
 
     }
 
     @Override
     public int getItemCount() {
-        return mFlavors.size();
+        return mDesigns.size();
     }
 
     //viewholder class
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imageItem;
         TextView imageText;
         TextView versionText;
         RelativeLayout itemParentLayout;
 
-        ViewHolder(@NonNull View itemView) {
+        OnItemListener onItemListener;
+
+        ViewHolder(@NonNull View itemView , OnItemListener onItemListener) {
             super(itemView);
 
             //grab the image, the text and the layout id's
@@ -83,6 +90,26 @@ public class FlavorViewAdapter extends RecyclerView.Adapter<FlavorViewAdapter.Vi
             versionText = itemView.findViewById(R.id.flavorVers);
             itemParentLayout = itemView.findViewById(R.id.listItemLayout);
 
+            this.onItemListener = onItemListener;
+            // set the listener to the itemView
+            itemView.setOnClickListener(this);
         }
+
+
+        // this will be called when a click happens on the view holder
+        @Override
+        public void onClick(View view) {
+            // so using the onItemClick of the interface will be passed to constructor
+            // and passing it the position
+            onItemListener.onItemClick(getAdapterPosition());
+        }
+    }
+
+    // interface that will be used in the activity where we want to do something with the
+    // clicked item. This interface contains a method that will be defined in the recycler adapter
+    // activity.
+    // This interface will also be passed to the constructor so we can use its method when we detect a click
+    public interface OnItemListener {
+        void onItemClick(int position);
     }
 }

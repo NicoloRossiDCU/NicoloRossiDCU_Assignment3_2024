@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,10 +19,10 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  * @author Chris Coughlan 2019
  */
-public class ProductList extends Fragment {
+public class ProductList extends Fragment  implements DesignViewAdapter.OnItemListener  {
 
     private static final String TAG = "RecyclerViewActivity";
-    private ArrayList<FlavorAdapter> mFlavor = new ArrayList<>();
+    private ArrayList<TShirtDesignAdapter> mTShirtDesign = new ArrayList<>();
 
     public ProductList() {
         // Required empty public constructor
@@ -34,24 +35,38 @@ public class ProductList extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_product_list, container, false);
         // Create an ArrayList of AndroidFlavor objects
-        mFlavor.add(new FlavorAdapter("Donut", "1.6", R.drawable.donut));
-        mFlavor.add(new FlavorAdapter("Eclair", "2.0-2.1", R.drawable.eclair));
-        mFlavor.add(new FlavorAdapter("Froyo", "2.2-2.2.3", R.drawable.froyo));
-        mFlavor.add(new FlavorAdapter("GingerBread", "2.3-2.3.7", R.drawable.gingerbread));
-        mFlavor.add(new FlavorAdapter("Honeycomb", "3.0-3.2.6", R.drawable.honeycomb));
-        mFlavor.add(new FlavorAdapter("Ice Cream Sandwich", "4.0-4.0.4", R.drawable.icecream));
-        mFlavor.add(new FlavorAdapter("Jelly Bean", "4.1-4.3.1", R.drawable.jellybean));
-        mFlavor.add(new FlavorAdapter("KitKat", "4.4-4.4.4", R.drawable.kitkat));
-        mFlavor.add(new FlavorAdapter("Lollipop", "5.0-5.1.1", R.drawable.lollipop));
-        mFlavor.add(new FlavorAdapter("Marshmallow", "6.0-6.0.1", R.drawable.marshmallow));
+        mTShirtDesign.add(new TShirtDesignAdapter("Human Android", "M-L-XL", R.drawable.android));
+        mTShirtDesign.add(new TShirtDesignAdapter("Angry pepper", "M-L-XL-XXL", R.drawable.angry_pepper));
+        mTShirtDesign.add(new TShirtDesignAdapter("Modern Art", "XS-M-L-XL", R.drawable.face_art));
+        mTShirtDesign.add(new TShirtDesignAdapter("Metal gorillas", "S-M-L-XL", R.drawable.gorillas_metal));
+        mTShirtDesign.add(new TShirtDesignAdapter("Face Hand illusion", "M-L-XL", R.drawable.hand_face));
+        mTShirtDesign.add(new TShirtDesignAdapter("Metal Guy", "M-L-XL", R.drawable.metal_guy));
+        mTShirtDesign.add(new TShirtDesignAdapter("Surrealist", "S-M-XL", R.drawable.time_sea));
+        mTShirtDesign.add(new TShirtDesignAdapter("Zombie", "M-L-XL", R.drawable.zombie));
 
         //start it with the view
         Log.d(TAG, "Starting recycler view");
         RecyclerView recyclerView = root.findViewById(R.id.recyclerView_view);
-        FlavorViewAdapter recyclerViewAdapter = new FlavorViewAdapter(getContext(), mFlavor);
+        DesignViewAdapter recyclerViewAdapter = new DesignViewAdapter(getContext(), mTShirtDesign, this);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return root;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        // getting the item that was clicked thanks to its position in the list
+        TShirtDesignAdapter clickedItem = mTShirtDesign.get(position);
+        showToast(this.getView(), clickedItem);
+    }
+
+    public void showToast(View view, TShirtDesignAdapter clickedItem )
+    {
+        CharSequence text = clickedItem.getStyleName();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText( this.getContext(), text, duration);
+        toast.show();
     }
 }
