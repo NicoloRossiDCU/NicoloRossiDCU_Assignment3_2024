@@ -125,7 +125,7 @@
             android:layout_marginTop="28dp"
             android:backgroundTint="#8C8383"
             android:buttonTint="#B3AAAA"
-            android:text="@string/"
+            android:text="@string/collection"
             android:textColor="#FDFFFFFF"
             android:textColorHint="#0C0C0C"
             app:layout_constraintEnd_toEndOf="parent"

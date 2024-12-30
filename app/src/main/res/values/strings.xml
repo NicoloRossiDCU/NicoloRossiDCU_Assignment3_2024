@@ -22,7 +22,7 @@
     <string name="to_email">my-tshirt@sda.ie</string>
     <string name="email_subject">Order Request </string>
     <string name="border">border</string>
-    <string name="collection">I prefer to come to the store</string>
+    <string name="collection">I prefer to collect it from the store</string>
 
     <string name="welcome_message_fragment">Welcome to my T-shirt Store!</string>
 

@@ -99,8 +99,7 @@ public class DesignViewAdapter extends RecyclerView.Adapter<DesignViewAdapter.Vi
         // this will be called when a click happens on the view holder
         @Override
         public void onClick(View view) {
-            // so using the onItemClick of the interface will be passed to constructor
-            // and passing it the position
+            // calling method onItemClick of the interface we injected with the position
             onItemListener.onItemClick(getAdapterPosition());
         }
     }
