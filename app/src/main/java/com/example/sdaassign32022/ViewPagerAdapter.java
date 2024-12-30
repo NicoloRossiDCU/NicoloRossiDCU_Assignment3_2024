@@ -34,9 +34,14 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         {
             case 1:
                 //code
+                fragment = new WelcomePage();
+                break;
+
+            case 2:
+                //code
                 fragment = new ProductList();
                 break;
-            case 2:
+            case 3:
                 //code
                 fragment = new OrderTshirt();
                 break;
@@ -47,7 +52,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -61,9 +66,13 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         {
             case 1:
                 //code
-                tabTitle = "Product List";
+                tabTitle = "Welcome";
                 break;
             case 2:
+                //code
+                tabTitle = "Product List";
+                break;
+            case 3:
                 //code
                 tabTitle = "Order T Shirt";
                 break;

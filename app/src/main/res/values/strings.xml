@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SDA Assign3 2022 Your Name</string>
+    <string name="app_name">SDA Assign3 2024 Nicolò Rossi</string>
     <string-array name="ui_time_entries">
         <item>" 2"</item>
         <item>" 3"</item>
@@ -9,20 +9,21 @@
         <item>14</item>
     </string-array>
 
-    <string name="images_desc">Flavors Images</string>
+    <string name="images_desc">Tshirt Images</string>
     <string name="plc_version">version</string>
     <string name="plc_flavor">flavor</string>
     <string name="placeholder">Order T shirt</string>
 
     <string name="customer_name">Name</string>
     <string name="order_message_1">Please find my order attached</string>
-    <string name="order_message_collect">I will collect it in&#160;</string>
+    <string name="order_message_collect">I will collect it in (days) &#160;</string>
     <string name="order_message_end">Regards</string>
     <string name="notification_title">Notification!</string>
     <string name="to_email">my-tshirt@sda.ie</string>
     <string name="email_subject">Order Request </string>
     <string name="border">border</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="collection">I prefer to come to the store</string>
+
+    <string name="welcome_message_fragment">Welcome to my T-shirt Store!</string>
 
 </resources>
